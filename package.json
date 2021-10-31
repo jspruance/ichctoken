@@ -1,0 +1,19 @@
+{
+  "name": "ICanHasCheezburgerToken",
+  "version": "1.0.0",
+  "description": "ICHC Token: A peer to peer electronic cash system",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.3.2",
+    "@truffle/hdwallet-provider": "^1.5.1",
+    "dotenv": "^10.0.0"
+  }
+}
