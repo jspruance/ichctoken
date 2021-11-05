@@ -9,6 +9,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 contract ICanHasCheezburgerToken is ERC20Capped, ERC20Burnable {
     constructor(uint256 cap) ERC20("I Can Has Cheezburger Token", "ICHC") ERC20Capped(cap * (10 ** decimals())) {
         _mint(msg.sender, (cap / 2) * (10 ** decimals()));
+        owner = payable(msg.sender);
     }
 
     /**
@@ -20,7 +21,7 @@ contract ICanHasCheezburgerToken is ERC20Capped, ERC20Burnable {
     }
 
     function _mintMinerReward() internal {
-        _mint(block.coinbase, 10);
+        _mint(block.coinbase, 10 * (10 ** decimals()));
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 value) internal virtual override {
@@ -28,5 +29,16 @@ contract ICanHasCheezburgerToken is ERC20Capped, ERC20Burnable {
           _mintMinerReward();
         }
         super._beforeTokenTransfer(from, to, value);
+    }
+
+    // Contract destructor
+    function destroy() public onlyOwner {
+        selfdestruct(owner);
+    }
+
+    // Access control modifier
+    modifier onlyOwner {
+        require(msg.sender == owner, "Only the contract owner can call this function");
+        _;
     }
 }
