@@ -45,19 +45,6 @@ contract Faucet {
       return _token.balanceOf(address(this));
     }
 
-    function getThisAddress() public view returns (address) {
-      return address(this);
-    }
-
-    function getThisSender() public view returns (address) {
-      return msg.sender;
-    }
-
-    function getThisTokenAddress() public view returns (address) {
-      return _token;
-    }
-
-
     function allowedToWithdraw(address _address) public view returns (bool) {
         if (lastAccessTime[_address] == 0) {
             return true;
@@ -77,6 +64,11 @@ contract Faucet {
     // setter for wait time
     function setWaitTime(uint256 amount) public onlyOwner {
         waitTime = amount * 1 minutes;
+    }
+
+    // setter for ERC20 token
+    function setToken(IERC20 token) public onlyOwner {
+        _token = token;
     }
 
     // Contract destructor

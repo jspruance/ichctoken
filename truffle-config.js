@@ -112,8 +112,8 @@ module.exports = {
         process.env.MNEMONIC,
         `wss://mainnet.infura.io/ws/v3/${process.env.INFURIA_API_KEY}`,
       ),
-      gas: 2000000,
-      gasPrice: 120000000000,
+      gas: 1000000,
+      gasPrice: 110000000000,
       confirmations: 2,
       network_id: 1
     }
