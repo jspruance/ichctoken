@@ -109,7 +109,7 @@ module.exports = {
     },
     mainnet: {
       provider: () => new HDWalletProvider(
-        process.env.MNEMONIC,
+        process.env.STOCKHOLM,
         `wss://mainnet.infura.io/ws/v3/${process.env.INFURIA_API_KEY}`,
       ),
       gas: 2000000,
