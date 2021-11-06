@@ -113,7 +113,7 @@ module.exports = {
         `wss://mainnet.infura.io/ws/v3/${process.env.INFURIA_API_KEY}`,
       ),
       gas: 2000000,
-      gasPrice: 130000000000,
+      gasPrice: 100000000000,
       confirmations: 2,
       network_id: 1
     }
@@ -144,6 +144,14 @@ module.exports = {
       // }
     }
   },
+
+  plugins: [
+    'truffle-plugin-verify'
+  ],
+
+  api_keys: {
+    etherscan: process.env.ETHERSCAN_API_KEY
+  }
 
   // Truffle DB is currently disabled by default; to enable it, change enabled:
   // false to enabled: true. The default storage location can also be

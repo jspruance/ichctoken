@@ -1,5 +1,5 @@
 const Faucet = artifacts.require("Faucet");
 
 module.exports = function(deployer) {
-  deployer.deploy(Faucet, "0x835bd15a761ddbf4fd44b16dcfd5e67f381a72eb");
+  deployer.deploy(Faucet, "0xB7813d0F0ff024Feb86F9D3A734d73AF489163A4");
 };

@@ -1,5 +1,6 @@
 // contracts/ICanHasCheezburgerToken.sol
 // SPDX-License-Identifier: MIT
+// This is the official version of ICHC Token
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
@@ -7,9 +8,13 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
 contract ICanHasCheezburgerToken is ERC20Capped, ERC20Burnable {
-    constructor(uint256 cap) ERC20("I Can Has Cheezburger Token", "ICHC") ERC20Capped(cap * (10 ** decimals())) {
-        _mint(msg.sender, (cap / 2) * (10 ** decimals()));
+    address payable owner;
+    uint256 public blockReward;
+
+    constructor(uint256 cap, uint reward) ERC20("I Can Has Cheezburger Token", "ICHC") ERC20Capped(cap * (10 ** decimals())) {
+        _mint(msg.sender, 69000000 * (10 ** decimals()));
         owner = payable(msg.sender);
+        blockReward = reward * (10 ** decimals());
     }
 
     /**
@@ -21,7 +26,7 @@ contract ICanHasCheezburgerToken is ERC20Capped, ERC20Burnable {
     }
 
     function _mintMinerReward() internal {
-        _mint(block.coinbase, 10 * (10 ** decimals()));
+        _mint(block.coinbase, blockReward);
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 value) internal virtual override {
@@ -29,6 +34,14 @@ contract ICanHasCheezburgerToken is ERC20Capped, ERC20Burnable {
           _mintMinerReward();
         }
         super._beforeTokenTransfer(from, to, value);
+    }
+
+    function getBlockReward() public view returns (uint256) {
+        return blockReward;
+    }
+
+    function setBlockReward(uint256 reward) public onlyOwner {
+        blockReward = reward * (10 ** decimals());
     }
 
     // Contract destructor
